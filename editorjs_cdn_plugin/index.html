@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New Project</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script>
+  </head>
+<body>
+  <header>
+    <div class="header">
+      <p>New Project</p>
+    </div>
+  </header>
+  <main class="main">
+    <!-- <nav class="nav">
+      <ul>
+        <li><a href="#">List1</a></li>
+      </ul>
+    </nav> -->
+    <section class="section">
+      <div class="flex_test-box">
+      <div class="flex_test-item">
+        <div class="menu">
+          Menu
+        </div>
+        <div class="button">
+          <a href="#">Button</a>
+        </div>
+      </div>
+      <div class="flex_test-item">
+        <div class="contents">
+          Here is project sandbox
+        </div>
+        <h1 class="center">Simple Editor.js</h1>
+        <div id="editor" class="center"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    sample
+  </footer>
+</body>
+<script>
+  //プラグインを提供するクラス
+  //（外部ファイルとして作成しても可）
+  class EasyImage {
+    
+    //メニューバーにアイコンを追加
+    static get toolbox() {
+      return {
+        title: 'Image',
+        icon: '<i class="fas fa-images"></i>'
+      };
+    }
+
+    //プラグインのUI処理
+    render(){
+      const div = document.createElement('div');
+      const input = document.createElement('input');
+
+      //画像URLが貼り付けられた時の処理
+      input.addEventListener('paste', (event) => {
+        const img = document.createElement('img');
+
+        //貼り付けられたURLを取得
+        img.src = event.clipboardData.getData('text');
+        img.width = 400;
+
+        //ブロックをリセット
+        div.innerHTML = '';
+        div.appendChild(img);
+
+      });
+
+      div.appendChild(input);
+
+      return div;
+    }
+
+    //保存時のデータ抽出
+    save(data){
+      return {
+        url: data.querySelector('img').src
+      }
+    }
+  }
+</script>
+<script>
+  const editor = new EditorJS({
+      holder: 'editor',
+      tools: {
+        header: Header,        
+        list: List,        
+        checklist: Checklist,
+        quote: Quote,
+        code: CodeTool,
+        header: Header,        
+        list: List,        
+        checklist: Checklist,
+        quote: Quote,
+        code: CodeTool,
+        table: Table,
+        image: EasyImage
+      }
+  });
+</script>
+<style>
+html,body,div,span,iframe,h1,h2,h3,h4,h5,p,a,img,ul,li,table,tr,th,td,tbody,footer,header,main,nav,section {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-weight: normal;
+	list-style: none;
+	text-decoration: none;
+  color: #fff;
+}
+body {
+	font-family: "Hiragino Kaku Gothic Pro", Meiryo, Osaka, sans-serif;
+	width: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.header {
+  background-color: #09f;
+  border: 0px solid #aaa;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  padding: 20px 0px 0px 0px;
+}
+.main {
+	background-color: #fff;
+	margin-bottom: 0px;
+	overflow: hidden;
+  min-height: 700px;
+  margin-top:0px;
+}
+.nav {
+	float: left;
+  margin-top: 0px;
+  margin-left: 20px;
+  width: 15%;
+  min-height: 100%;
+	overflow: hidden;
+}
+.section {
+  margin-top: 0px;
+  width: 100%;
+	overflow: hidden;
+}
+.button {
+	display: block;
+  text-align: center;
+	width:  100px;
+	height: 20px;
+	margin: auto;
+	padding: 10px 10px 10px 10px;
+  color: #fff;
+	background-color: #09f;
+	transition: 0.4s;
+  border-radius: 0.3rem;
+}
+.button:hover {
+	transform: scale(1.1,1.1);
+  border-radius: 0.3rem;
+}
+.menu {
+  color: #777;
+  min-width: 250px;
+}
+.contents {
+  color: #777;
+  /* width: 1300px; */
+}
+.flex_test-box {
+    display: flex;
+}
+.flex_test-box {
+    background-color: #fff;  
+    padding:  10px;          
+} 
+.flex_test-item {
+    padding: 10px;
+    color:  #777; 
+    margin:  10px;
+    border-radius:  5px;
+}
+.flex_test-item:nth-child(1) {
+    background-color:  #eee;
+    min-height: 750px;
+}
+.flex_test-item:nth-child(2) {
+    background-color:  #5cf;
+    flex-grow: 1;    
+}
+.flex_test-item:nth-child(3) {
+    background-color: #eee;
+}
+.footer {
+  color: #fff;
+  height: 80px;
+  background-color: #07c;
+  font-size: 1.0rem;
+  /* line-height: 50px; */
+  text-align: center;
+  padding: 40px 0px 10px 0px;
+	width: 100%;
+  grid-row-start: 3;
+  grid-row-end: 4;
+ }
+.center{
+  color: #333;
+  border: 1px solid #ccc;
+  width: 700px;
+  text-align: left;
+  margin: auto;
+  padding: 30px;
+}
+</style>
+</html>
